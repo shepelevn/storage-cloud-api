@@ -1,0 +1,17 @@
+TODOS: 
+
+  - Create sql migration scripts
+
+  - Delete unused uses somehow
+
+  - Move postman collection to the project
+
+  - Exclude files in files folder from git
+  - Exclude secret config from git
+
+  - Write readme
+
+  - Run phpstan
+  - Check todos
+  - Delete var_dump's and print_r's
+  - Check public folder

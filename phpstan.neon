@@ -1,0 +1,13 @@
+parameters:
+    level: max
+    paths:
+        - src
+    excludePaths:
+        - vendor
+    bootstrapFiles:
+        - autoload.php
+    typeAliases:
+        DataValue: 'string | int | float | bool | null | DateTimeImmutable'
+        SimpleValue: 'string | int | float | bool | null'
+        JSONValue: 'string | int | float | bool | null'
+        HttpDataArray: 'array<string, string>'
