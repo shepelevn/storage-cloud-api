@@ -13,10 +13,7 @@ use Kernel\Models\Repository\MapperRepository;
 use Kernel\Models\Repository\DBRepositoryFactory;
 use Kernel\Models\Repository\Repository;
 use Models\User\User;
-use Models\User\UserFactory;
 use Models\User\UserMapper;
-use Services\AuthService;
-use Services\MailerService;
 use Services\PDOConnection;
 
 class AdminController extends Controller

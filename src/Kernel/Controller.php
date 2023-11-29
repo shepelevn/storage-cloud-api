@@ -6,7 +6,6 @@ namespace Kernel;
 
 use Http\HTTPException;
 use Kernel\Models\BodyData;
-use Kernel\Models\Repository\Repository;
 use LogicException;
 
 abstract class Controller

@@ -72,7 +72,10 @@ class UserMapper extends DBDataMapper
             !is_string($lastName) ||
             !is_string($email) ||
             !is_string($password) ||
-            !is_string($dob) ||
+            !(
+                is_string($dob) ||
+                is_null($dob)
+            ) ||
             !(
                 is_string($passwordResetToken) ||
                 is_null($passwordResetToken)
@@ -107,7 +110,7 @@ class UserMapper extends DBDataMapper
             $email,
             $password,
             (bool) $data['is_admin']->value,
-            new DateTimeImmutable($dob),
+            !is_null($dob) ? new DateTimeImmutable($dob) : null,
             $genderValue,
             $passwordResetToken,
             !is_null($passwordResetTokenExpiration)

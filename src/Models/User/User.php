@@ -116,7 +116,6 @@ class User
         $this->setFirstName($parameters->checkAndGet('firstName'));
         $this->setLastName($parameters->checkAndGet('lastName'));
         $this->setEmail($parameters->checkAndGet('email'));
-        $this->setPassword($parameters->checkAndGet('password'));
         $this->setIsAdmin($parameters->checkAndGet('isAdmin'));
         $this->setDobFromString($parameters->checkAndGet('dob'));
         $this->setGender($parameters->checkAndGet('gender'));
@@ -303,7 +302,7 @@ class User
     public function setLastName(mixed $lastName): void
     {
         if (!(is_string($lastName))) {
-            throw new HTTPException(400, 'lastName is not string or null');
+            throw new HTTPException(400, 'lastName is not string');
         }
 
         $this->lastName = $lastName;
@@ -335,6 +334,10 @@ class User
     {
         if (!is_string($rawPassword)) {
             throw new HTTPException(400, 'password is not string');
+        }
+
+        if ($rawPassword === '') {
+            throw new HTTPException(400, 'password is empty string');
         }
 
         $this->password = self::hashPassword($rawPassword);
@@ -369,12 +372,13 @@ class User
      **/
     public function setDobFromString(mixed $dobString): void
     {
-        if (!is_string($dobString)) {
-            throw new HTTPException(400, '');
+        if (!is_string($dobString) && !is_null($dobString)) {
+            throw new HTTPException(400, 'Date of birth is not string or null');
         }
 
-        if ($dobString === '') {
+        if ($dobString === '' || is_null($dobString)) {
             $this->setDob(null);
+            return;
         }
 
         try {

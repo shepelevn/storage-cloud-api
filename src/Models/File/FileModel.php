@@ -54,7 +54,7 @@ class FileModel
     public function checkAccess(int $userId): void
     {
         if ($this->userId !== $userId) {
-            throw new HTTPException(403, 'You have no permision to view or edit this file');
+            throw new HTTPException(403, 'You have no permision to edit this file');
         }
     }
 

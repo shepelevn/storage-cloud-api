@@ -192,6 +192,14 @@ class FileController extends Controller
         $file->setName($postParameters->checkAndGet('name'));
         $file->updatedAt = new DateTimeImmutable();
 
+        $sameFolderFiles = $this->fileRepository->getByProperty('folder_id', $file->folderId);
+
+        foreach ($sameFolderFiles as $sameFolderFile) {
+            if ($sameFolderFile->name === $file->name) {
+                throw new HTTPException(400, 'File with this name already exists in this folder');
+            }
+        }
+
         $this->fileRepository->update($id, $file);
 
         return $response;
@@ -271,6 +279,14 @@ class FileController extends Controller
         $postParameters = self::fromJsonToDataObject($request->getBody());
 
         $folder->setName($postParameters->checkAndGet('name'));
+
+        $sameParentFolders = $this->folderRepository->getByProperty('parent_id', $folder->parentId);
+
+        foreach ($sameParentFolders as $sameParentFolder) {
+            if ($sameParentFolder->name === $folder->name) {
+                throw new HTTPException(400, 'Folder with this name already exists in parent folder');
+            }
+        }
 
         $this->folderRepository->update($id, $folder);
 

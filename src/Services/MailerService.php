@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Services;
 
-use LogicException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use RuntimeException;
