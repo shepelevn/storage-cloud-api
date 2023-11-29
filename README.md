@@ -13,7 +13,7 @@
 Импорт базы данных производится с помощью команды
 
 ```bash
-mysql -u user -p 'password' [Имя базы данных] < "./project_files/database_dump.sql"
+mysql -u username -p [Имя базы данных] < "./project_files/database_dump.sql"
 ```
 
 ## Конфигурация
