@@ -1,0 +1,6 @@
+TODOS: 
+
+  - Run phpstan
+  - Check todos
+  - Delete var_dump's and print_r's
+  - Check public folder

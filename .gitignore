@@ -3,3 +3,4 @@ vendor/
 node_modules/
 .env
 **/Config/Secret/*
+**/files/**
