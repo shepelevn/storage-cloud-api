@@ -1,47 +1,52 @@
-# Итоговая работа PHP: Облачное хранилище
+# REST API for cloud storage web-application
 
-## Содержание
+## README.md
 
-* [Развертывание проекта](#развертывание-проекта)
-* [Импорт базы данных](#импорт-базы-данных)
-* [Конфигурация](#конфигурация)
-* [Настройка Apache](#настройка-apache)
-* [Эндпойнты сервера](#эндпойнты-сервера)
-  * [Примечания по данным](#примечания-по-данным)
+* en [English](README.md)
+* ru [Русский](./readme/README.ru.md)
+
+## Table of contents
+
+* [Project setup](#project-setup)
+* [Importing database](#importing-database)
+* [Configuration](#configuration)
+* [Setting up Apache](#setting-up-apache)
+* [Server endpoints](#server-endpoints)
+  * [Notes on data](#notes-on-data)
   * [Users](#users)
   * [Admin](#admin)
   * [Directories](#directories)
   * [Files](#files)
   * [Share](#share)
-* [Команды postman](#команды-postman)
-* [Примечания](#примечания)
+* [Postman commands](#postman-commands)
+* [Notes](#notes)
 
-## Развертывание проекта
+## Project setup
 
-Действия при развертывании проекта:
+Steps to set up the project:
 
-* Импортировать базу данных
-* Создать файлы конфигурации
-* Настроить Apache
+* Import database
+* Create configuration files
+* Set up Apache
 
-## Импорт базы данных
+## Importing database
 
-Импорт базы данных производится с помощью команды
+To import database run this command
 
 ```bash
-mysql -u username -p [Имя базы данных] < "./project_files/database_dump.sql"
+mysql -u username -p [Database name] < "./project_files/database_dump.sql"
 ```
 
-## Конфигурация
+## Configuration
 
-Файлы конфигурации с паролями для SMTP и MySQL исключены из репозитория git.  
-Поэтому необходимо создать свою конфигурацию в папке  `./src/Config/Secret/`.  
-Пример конфигурации можно найти в папке `./src/Config/SecretExample/`.
+Create config files with data for SMTP and MySQL in `./src/Config/Secret/`
+folder.
+Examples of configuration are inside `./src/Config/SecretExample/`.
 
-## Настройка Apache
+## Setting up Apache
 
-Конфигурационный файл вашего виртуального сервера должен выглядеть  
-примерно так (используется каталог по умолчанию — `/var/www/html`):
+Configuration file for your virtual server should look like this
+(default folder is `/var/www/html`):
 
 ```conf
 <VirtualHost *:80>
@@ -65,27 +70,26 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 </VirtualHost>
 ```
 
-Убедитесь, что активирован `apache_mod_rewrite`.
+Make sure that `apache_mod_rewrite` is enabled.
 
-## Эндпойнты сервера
+## Server endpoints
 
-### Примечания по данным
+### Notes on data
 
-`dob`, `gender` могут быть `null`. `lastName` может быть пустой строкой.
-`gender` принимает значения "M" и "F"
+`dob`, `gender` can be `null`. `lastName` can be empty string.
+`gender` can be either "M" or "F".
 
-`parentId` в значении `null` принимается как корневая директория.
+If `parentId` is received as `null` it is considered a root directory.
 
 ### Users
 
-`GET: /users/list` - Получить список пользователей с безопасной информацией
+`GET: /users/list` - Get list of users with safe information
 
-`GET: /users/get/{userId}` - Получить безопасную информацию конкретного
-пользователя.
+`GET: /users/get/{userId}` - Get the safe information about a specific user
 
-`GET: /users/search/{email}` - Поиск пользователей по email.
+`GET: /users/search/{email}` - Search users by email
 
-Возвращают:
+Return data:
 
 ```json
 {
@@ -102,9 +106,9 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 }
 ```
 
-`PUT: /users/update` - Изменить информацию пользователя текущей сессии.
+`PUT: /users/update` - Change current user info
 
-Принимает:
+Receives:
 
 ```json
 {
@@ -115,9 +119,9 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 }
 ```
 
-`POST: /users/login` - Войти в аккаунт.
+`POST: /users/login` - log into account
 
-Принимает:
+Receives:
 
 ```json
 {
@@ -126,14 +130,14 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 }
 ```
 
-`GET: /users/reset_password?email=username@example.com` - Отправить токен
-сброса пароля на почту.
+`GET: /users/reset_password?email=username@example.com` - Send reset token
+to user mail
 
-Принимает: Query параметр `email`
+Receives: Query parameter `email`
 
-`POST: /users/reset_password` - Сбросить пароль.
+`POST: /users/reset_password` - Reset password
 
-Принимает:
+Receives:
 
 ```json
 {
@@ -143,9 +147,9 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 }
 ```
 
-`POST: /users/register` - Зарегистрироваться.
+`POST: /users/register` - Register
 
-Принимает:
+Receives:
 
 ```json
 {
@@ -158,9 +162,9 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 }
 ```
 
-`POST: /users/verify_email` - Подтвердить email.
+`POST: /users/verify_email` - Confirm email
 
-Принимает:
+Receives:
 
 ```json
 {
@@ -171,12 +175,11 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 
 ### Admin
 
-`GET: /admin/list` - Получить список пользователей с полной информацией.
+`GET: /admin/list` - Get users list with full information
 
-`GET: /admin/get/{userId}` - Получить полную информацию конкретного
-пользователя.
+`GET: /admin/get/{userId}` - Get full info about a specific user
 
-Возвращают:
+Return data:
 
 ```json
 {
@@ -195,9 +198,9 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 }
 ```
 
-`PUT: /admin/update/{userId}` - Изменить данные пользователя.
+`PUT: /admin/update/{userId}` - Change user data
 
-Принимает:
+Receives:
 
 ```json
 {
@@ -210,13 +213,13 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 }
 ```
 
-`DELETE: /admin/delete/{userId}` - Удалить пользователя.
+`DELETE: /admin/delete/{userId}` - Delete user
 
 ### Directories
 
-`POST: /directories/add` - Добавить папку.
+`POST: /directories/add` - Add folder
 
-Принимает:
+Receives:
 
 ```json
 {
@@ -225,9 +228,9 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 }
 ```
 
-`PUT: /directories/rename/{directoryId}` - Переименовать папку.
+`PUT: /directories/rename/{directoryId}` - Rename folder
 
-Принимает:
+Receives:
 
 ```json
 {
@@ -235,12 +238,11 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 }
 ```
 
-`GET: /directories/get` - Получить информацию о корневой папке.
+`GET: /directories/get` - Get info about the root folder
 
-`GET: /directories/get/{directoryId}` - Получить информацию о конкретной
-папке.
+`GET: /directories/get/{directoryId}` - Get info about a specific folder
 
-Возвращают:
+Return data:
 
 ```json
 {
@@ -279,18 +281,18 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 }
 ```
 
-`DELETE: /directories/delete/{directoryId}` - Удалить папку.
+`DELETE: /directories/delete/{directoryId}` - Delete folder
 
 ### Files
 
-`GET: /files/list` - Получить список файлов.
+`GET: /files/list` - Get files list
 
-`GET: /files/list-shared` - Получить список файлов других пользователей
-к которым предоставлен доступ.
+`GET: /files/list-shared` - Get files list from other users who shared
+the file with current user
 
-`GET: /files/get/{fileId}` - Получить информацию о файле.
+`GET: /files/get/{fileId}` - Get information about a file
 
-Возвращают:
+Return data:
 
 ```json
 {
@@ -311,19 +313,19 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 }
 ```
 
-`GET: /files/download/{fileId}` - Скачать файл.
+`GET: /files/download/{fileId}` - Download file
 
-Возвращает файл.
+Returns a file.
 
-`POST: /files/add` - Добавить файл.
+`POST: /files/add` - Add file
 
-Принимает:
+Receives:
 
-Два POST параметра `folderId` и `file`
+Two POST parameters `folderId` and `file`
 
-`PUT: /files/rename/{fileId}` - Переименовать файл.
+`PUT: /files/rename/{fileId}` - Rename file
 
-Принимает:
+Receives:
 
 ```json
 {
@@ -331,14 +333,13 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 }
 ```
 
-`DELETE: /files/remove/{fileId}` - Удалить файл.
+`DELETE: /files/remove/{fileId}` - Delete file
 
 ### Share
 
-`GET: /files/share/{fileId}` - Получить список пользователей которым
-предоставлен доступ к файлу.
+`GET: /files/share/{fileId}` - Get users list who have access to file
 
-Возвращает:
+Receives:
 
 ```json
 [
@@ -350,21 +351,24 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 ]
 ```
 
-`PUT: /files/share/{fileId}/{userId}` - Поделиться файлом.
+`PUT: /files/share/{fileId}/{userId}` - Share file
 
-`DELETE: /files/share/{fileId}/{userId}` - Отменить доступ к файлу.
+`DELETE: /files/share/{fileId}/{userId}` - Revoke access to a file for user
 
-## Команды postman
+## Postman commands
 
-Файл с командами Postman для тестирования находится в папке
-`./project_files/`.
+File with Postman commands for testing is inside the `./project_files/`
+folder.
 
-## Примечания
+## Notes
 
-В файле конфига `./src/Config/config.env` можно поменять настройки 
-обработки внутренних ошибок сервера.  
-При `DEV=true` сообщения исключений выводятся в теле ответа.  
-При `DEBUG=true` исключения выкидываются и выводятся в теле сообщения.  
+It's possible to change server inner errors processing by changing the  
+config file inside `./src/Config/config.env`.
 
-Также в конфиге можно поменять максимальный размер файла и доступный
-размер хранилища пользователя.
+With `DEV=true` the exception messages are being sent in response body.
+
+With `DEBUG=true` exceptions are being thrown and are being shown in a
+response body
+
+Also in config file you can change maximum file size and default  
+total available space for users.
