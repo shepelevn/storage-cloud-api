@@ -7,6 +7,7 @@
 
 ## Table of contents
 
+* [Technologies used in the project](#technologies-used-in-the-project)
 * [Project setup](#project-setup)
 * [Importing database](#importing-database)
 * [Configuration](#configuration)
@@ -20,6 +21,11 @@
   * [Share](#share)
 * [Postman commands](#postman-commands)
 * [Notes](#notes)
+
+## Technologies used in the project
+
+* `PHP`
+* `PHPStan`
 
 ## Project setup
 
