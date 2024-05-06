@@ -101,9 +101,9 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 ```json
 {
   "id": 18,
-  "firstName": "Nick",
-  "lastName": "last_name",
-  "email": "shepelev@example.com",
+  "firstName": "John",
+  "lastName": "Smith",
+  "email": "user@example.com",
   "dob": {
     "date": "1997-06-25 00:00:00.000000",
     "timezone_type": 3,
@@ -119,8 +119,8 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 
 ```json
 {
-    "firstName": "Nikolay",
-    "lastName": "",
+    "firstName": "John",
+    "lastName": "Smith",
     "dob": "1997-06-25",
     "gender": "M"
 }
@@ -132,7 +132,7 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 
 ```json
 {
-    "email": "shepelev@example.com",
+    "email": "user@example.com",
     "password": "password"
 }
 ```
@@ -148,7 +148,7 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 
 ```json
 {
-    "email": "shepelevnikolay97@gmail.com",
+    "email": "user@example.com",
     "password": "password",
     "token": "P+axG5k9gStneqbLmH9K4e3u8DIv0Bdh6iPUDu4zFbxuyd7GjuUBWXPc/x8eTgb+Mh75WuTF41jlu5Qh"
 }
@@ -160,11 +160,11 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 
 ```json
 {
-    "firstName": "Ivan",
-    "lastName": "",
+    "firstName": "John",
+    "lastName": "Smith",
     "email":"user1@example.com",
     "password": "password",
-    "dob": "",
+    "dob": "1997-06-25",
     "gender": "M"
 }
 ```
@@ -175,7 +175,7 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 
 ```json
 {
-    "email": "shepelev@example.com",
+    "email": "user@example.com",
     "token": "inuRtdsDIaACMkvca4z32ONxKL9QZ74jBiGaFwwgb0fMvcNdiK8+iWUUn1cMIbbPAOrprZyN8IfUU8Yx"
 }
 ```
@@ -192,9 +192,9 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 ```json
 {
     "id": 13,
-    "firstName": "Nikolay",
-    "lastName": "last_name",
-    "email": "shepelevnikolay97@gmail.com",
+    "firstName": "John",
+    "lastName": "Smith",
+    "email": "user@example.com",
     "isAdmin": true,
     "dob": {
         "date": "1997-06-25 00:00:00.000000",
@@ -212,9 +212,9 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 
 ```json
 {
-    "firstName": "Nikolay",
-    "lastName": "",
-    "email": "shepelevnikolay97@gmail.com",
+    "firstName": "John",
+    "lastName": "Smith",
+    "email": "user@example.com",
     "isAdmin": true,
     "dob": "1997-06-25",
     "gender": "M"
@@ -231,7 +231,7 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 
 ```json
 {
-    "name": "test",
+    "name": "Directory name",
     "parentId": null
 }
 ```
@@ -242,7 +242,7 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
 
 ```json
 {
-    "name": "memphis unlimited"
+    "name": "New name"
 }
 ```
 
@@ -264,7 +264,7 @@ mysql -u username -p [Имя базы данных] < "./project_files/database_
     "folders": [
         {
             "id": 46,
-            "name": "test",
+            "name": "Directory name",
             "userId": 13,
             "parentId": 41
         }

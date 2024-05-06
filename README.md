@@ -37,7 +37,7 @@ Steps to set up the project:
 
 ## Importing database
 
-To import database run this command
+To import the database, run this command
 
 ```bash
 mysql -u username -p [Database name] < "./project_files/database_dump.sql"
@@ -45,13 +45,13 @@ mysql -u username -p [Database name] < "./project_files/database_dump.sql"
 
 ## Configuration
 
-Create config files with data for SMTP and MySQL in `./src/Config/Secret/`
+Create config files with data for SMTP and MySQL in the `./src/Config/Secret/`
 folder.
 Examples of configuration are inside `./src/Config/SecretExample/`.
 
 ## Setting up Apache
 
-Configuration file for your virtual server should look like this
+The configuration file for your virtual server should look like this
 (default folder is `/var/www/html`):
 
 ```conf
@@ -89,7 +89,7 @@ If `parentId` is received as `null` it is considered a root directory.
 
 ### Users
 
-`GET: /users/list` - Get list of users with safe information
+`GET: /users/list` - Get a list of users with safe information
 
 `GET: /users/get/{userId}` - Get the safe information about a specific user
 
@@ -100,9 +100,9 @@ Return data:
 ```json
 {
   "id": 18,
-  "firstName": "Nick",
-  "lastName": "last_name",
-  "email": "shepelev@example.com",
+  "firstName": "John",
+  "lastName": "Smith",
+  "email": "user@example.com",
   "dob": {
     "date": "1997-06-25 00:00:00.000000",
     "timezone_type": 3,
@@ -118,26 +118,26 @@ Receives:
 
 ```json
 {
-    "firstName": "Nikolay",
-    "lastName": "",
+    "firstName": "John",
+    "lastName": "Smith",
     "dob": "1997-06-25",
     "gender": "M"
 }
 ```
 
-`POST: /users/login` - log into account
+`POST: /users/login` - Log into account
 
 Receives:
 
 ```json
 {
-    "email": "shepelev@example.com",
+    "email": "user@example.com",
     "password": "password"
 }
 ```
 
 `GET: /users/reset_password?email=username@example.com` - Send reset token
-to user mail
+to the user's mail
 
 Receives: Query parameter `email`
 
@@ -147,7 +147,7 @@ Receives:
 
 ```json
 {
-    "email": "shepelevnikolay97@gmail.com",
+    "email": "user@example.com",
     "password": "password",
     "token": "P+axG5k9gStneqbLmH9K4e3u8DIv0Bdh6iPUDu4zFbxuyd7GjuUBWXPc/x8eTgb+Mh75WuTF41jlu5Qh"
 }
@@ -159,11 +159,11 @@ Receives:
 
 ```json
 {
-    "firstName": "Ivan",
-    "lastName": "",
+    "firstName": "John",
+    "lastName": "Smith",
     "email":"user1@example.com",
     "password": "password",
-    "dob": "",
+    "dob": "1994-06-25",
     "gender": "M"
 }
 ```
@@ -174,7 +174,7 @@ Receives:
 
 ```json
 {
-    "email": "shepelev@example.com",
+    "email": "user@example.com",
     "token": "inuRtdsDIaACMkvca4z32ONxKL9QZ74jBiGaFwwgb0fMvcNdiK8+iWUUn1cMIbbPAOrprZyN8IfUU8Yx"
 }
 ```
@@ -190,9 +190,9 @@ Return data:
 ```json
 {
     "id": 13,
-    "firstName": "Nikolay",
-    "lastName": "last_name",
-    "email": "shepelevnikolay97@gmail.com",
+    "firstName": "John",
+    "lastName": "Smith",
+    "email": "user@example.com",
     "isAdmin": true,
     "dob": {
         "date": "1997-06-25 00:00:00.000000",
@@ -210,9 +210,9 @@ Receives:
 
 ```json
 {
-    "firstName": "Nikolay",
-    "lastName": "",
-    "email": "shepelevnikolay97@gmail.com",
+    "firstName": "John",
+    "lastName": "Smith",
+    "email": "user@example.com",
     "isAdmin": true,
     "dob": "1997-06-25",
     "gender": "M"
@@ -223,24 +223,24 @@ Receives:
 
 ### Directories
 
-`POST: /directories/add` - Add folder
+`POST: /directories/add` - Add a folder
 
 Receives:
 
 ```json
 {
-    "name": "test",
+    "name": "Directory name",
     "parentId": null
 }
 ```
 
-`PUT: /directories/rename/{directoryId}` - Rename folder
+`PUT: /directories/rename/{directoryId}` - Rename a folder
 
 Receives:
 
 ```json
 {
-    "name": "memphis unlimited"
+    "name": "New name"
 }
 ```
 
@@ -261,7 +261,7 @@ Return data:
     "folders": [
         {
             "id": 46,
-            "name": "test",
+            "name": "Directory name",
             "userId": 13,
             "parentId": 41
         }
@@ -291,9 +291,9 @@ Return data:
 
 ### Files
 
-`GET: /files/list` - Get files list
+`GET: /files/list` - Get a list of files
 
-`GET: /files/list-shared` - Get files list from other users who shared
+`GET: /files/list-shared` - Get a list of files from other users who shared
 the file with current user
 
 `GET: /files/get/{fileId}` - Get information about a file
@@ -323,13 +323,13 @@ Return data:
 
 Returns a file.
 
-`POST: /files/add` - Add file
+`POST: /files/add` - Add a file
 
 Receives:
 
 Two POST parameters `folderId` and `file`
 
-`PUT: /files/rename/{fileId}` - Rename file
+`PUT: /files/rename/{fileId}` - Rename a file
 
 Receives:
 
@@ -368,13 +368,13 @@ folder.
 
 ## Notes
 
-It's possible to change server inner errors processing by changing the  
-config file inside `./src/Config/config.env`.
+It's possible to change how internal server errors are handled by modifying  
+the config file inside `./src/Config/config.env`.
 
 With `DEV=true` the exception messages are being sent in response body.
 
-With `DEBUG=true` exceptions are being thrown and are being shown in a
-response body
+With `DEBUG=true` exceptions are thrown and their messages are displayed in
+a response body
 
-Also in config file you can change maximum file size and default  
+Also, in config file, you can change maximum file size and default  
 total available space for users.
