@@ -13,6 +13,9 @@ class MailerService
     private string $isDebug;
     private string $smtpUsername;
     private string $smtpPassword;
+    private string $smtpHost;
+    private string $smtpPort;
+    private string $smtpSecure;
 
     public function __construct(ConfigService $configService)
     {
@@ -22,6 +25,9 @@ class MailerService
         $this->isDebug = $mainConfig['DEBUG'];
         $this->smtpUsername = $smtpConfig['SMTP_USERNAME'];
         $this->smtpPassword = $smtpConfig['SMTP_PASSWORD'];
+        $this->smtpHost = $smtpConfig['SMTP_HOST'];
+        $this->smtpPort = $smtpConfig['SMTP_PORT'];
+        $this->smtpSecure = $smtpConfig['SMTP_SECURE'];
     }
 
     private function createMailer(): PHPMailer
@@ -39,10 +45,13 @@ class MailerService
             $mailer->SMTPDebug = SMTP::DEBUG_OFF;
         }
 
-        $mailer->Host = 'ssl://smtp.yandex.ru';
-        $mailer->Port = 465;
-        $mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $mailer->SMTPAuth = true;
+        $mailer->Host = $this->smtpHost;
+        $mailer->Port = $this->smtpPort;
+
+        if ($this->smtpSecure) {
+            $mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mailer->SMTPAuth = true;
+        }
 
         $mailer->Username = $this->smtpUsername;
         $mailer->Password = $this->smtpPassword;

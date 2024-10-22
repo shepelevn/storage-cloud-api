@@ -3,4 +3,5 @@ vendor/
 node_modules/
 .env
 **/Config/Secret/*
-**/files/**
+files/*
+!files/.gitkeep

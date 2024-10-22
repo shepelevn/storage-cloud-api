@@ -49,6 +49,11 @@ Create config files with data for SMTP and MySQL in the `./src/Config/Secret/`
 folder.
 Examples of configuration are inside `./src/Config/SecretExample/`.
 
+## Starting the development server
+
+You can set up Apache, or you can run the bash script `./devServer.sh` to run the
+development server.
+
 ## Setting up Apache
 
 The configuration file for your virtual server should look like this
