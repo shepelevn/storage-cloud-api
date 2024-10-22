@@ -18,8 +18,9 @@ class PDOConnection
         $dbName = $databaseConfig['MYSQL_DB'];
         $username = $databaseConfig['MYSQL_USERNAME'];
         $password = $databaseConfig['MYSQL_PASSWORD'];
+        $port = $databaseConfig['MYSQL_PORT'];
 
-        $this->connection = new PDO("mysql:host=$host; dbname=$dbName; charset=UTF8", $username, $password);
+        $this->connection = new PDO("mysql:host=$host; port=$port; dbname=$dbName; charset=UTF8", $username, $password);
     }
 
     public function getConnection(): PDO
